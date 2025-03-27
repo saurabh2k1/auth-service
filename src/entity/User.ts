@@ -8,6 +8,9 @@ export class User {
   @Column({ unique: true })
   username: string;
 
+  @Column({ unique: true })
+  email: string;
+  
   @Column()
   passwordHash: string;
 
@@ -17,6 +20,12 @@ export class User {
   @Column({ nullable: true })
   totpSecret: string;
 
+  @Column({ nullable: true })
+  resetToken: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  resetTokenExpiry: Date;
+  
   @CreateDateColumn()
   createdAt: Date;
 }
