@@ -21,10 +21,10 @@ export class User {
   totpSecret: string;
 
   @Column({ nullable: true })
-  resetToken: string;
+  resetToken?: string;
 
   @Column({ type: 'timestamp', nullable: true })
-  resetTokenExpiry: Date;
+  resetTokenExpiry?: Date;
   
   @CreateDateColumn()
   createdAt: Date;

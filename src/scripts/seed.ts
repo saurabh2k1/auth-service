@@ -24,6 +24,7 @@ const seedSuperAdmin = async () => {
             username: process.env.SUPER_ADMIN_USERNAME || 'superadmin',
             passwordHash,
             role: 'superadmin',
+            email: 'superadmin@example.com',
         });
 
         await userRepository.save(superAdmin);

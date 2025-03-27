@@ -6,7 +6,7 @@ import { validationResult } from "express-validator";
 export const getAllUsers = async (req: Request, res: Response): Promise<any> => {
     try {
         const userRepository = AppDataSource.getRepository(User);
-        const users = await userRepository.find({ select: ['id', 'username', 'role', 'createdAt'] });
+        const users = await userRepository.find({ select: ['id', 'username', 'email', 'role', 'createdAt'] });
         return res.status(200).json(users);               
     } catch (error) {
         console.error('Error fetching users:', error);

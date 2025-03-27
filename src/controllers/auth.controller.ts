@@ -19,7 +19,7 @@ export const registerUser = async (req: Request, res: Response) => {
     }
     
     try {
-        const { username, password } = req.body;
+        const { username, password, email } = req.body;
         const userRepository = AppDataSource.getRepository(User);
         
         // Check if the user already exists
@@ -36,7 +36,8 @@ export const registerUser = async (req: Request, res: Response) => {
         const user = userRepository.create({
             username,
             passwordHash,
-            role: 'user'
+            role: 'user',
+            email,
         });
 
         // Save the user to the database
@@ -166,7 +167,37 @@ const verifyOTP = async (otp: string, secret: string): Promise<boolean> => {
     }
 };
 
+// Password change
+export const changePassword = async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+        const userId = (req as any).user.id; // Extract user ID from JWT
+        const { oldPassword, newPassword } = req.body;
+        const userRepository = AppDataSource.getRepository(User);
 
+        const user = await userRepository.findOne({ where: { id: userId } });
+        if (!user){
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const isPasswordValid = await bcrypt.compare(oldPassword, user.passwordHash);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+
+        const newPasswordHash = await bcrypt.hash(newPassword, 10);
+        user.passwordHash = newPasswordHash;
+        await userRepository.save(user);
+
+        return res.status(200).json({ message: 'Password changed successfully' });
+        
+    } catch (error) {
+        console.error('Password change error : ', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};  
         
 
       
