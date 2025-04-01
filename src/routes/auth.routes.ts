@@ -1,4 +1,3 @@
-import { body } from "express-validator";
 import { changePassword, loginUser, registerUser, setupTOTP, verifyOTPForTOTP } from "../controllers/auth.controller";
 import { authenticateJWT } from "../middleware/auth.middleware";
 import { loginValidator, passwordChangeValidator, passwordResetRequestValidator, passwordResetValidator, registerValidator, twoFASetupValidator, twoFAVarifyValidator } from "../middleware/auth.validator";

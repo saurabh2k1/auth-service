@@ -16,10 +16,10 @@ export const AppDataSource = new DataSource({
   subscribers: ["src/subscriber/**/*.ts"],
 });
 
-AppDataSource.initialize()
-    .then(() => {
-    console.log("Data Source has been initialized!");
-  })
-  .catch((err) => {
-    console.error("Error during Data Source initialization:", err);
-  });
+// AppDataSource.initialize()
+//     .then(() => {
+//     // console.log("Data Source has been initialized!");
+//   })
+//   .catch((err) => {
+//     // console.error("Error during Data Source initialization:", err);
+//   });

@@ -9,7 +9,7 @@ export const getAllUsers = async (req: Request, res: Response): Promise<any> => 
         const users = await userRepository.find({ select: ['id', 'username', 'email', 'role', 'createdAt'] });
         return res.status(200).json(users);               
     } catch (error) {
-        console.error('Error fetching users:', error);
+        // console.error('Error fetching users:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -35,7 +35,7 @@ export const updateUserRole = async (req: Request, res: Response): Promise<any> 
         
         return res.status(200).json({ message: 'User role updated successfully' });
     } catch (error) {
-        console.error('Error updating user role:', error);
+        // console.error('Error updating user role:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -58,7 +58,7 @@ export const deleteUser = async (req: Request, res: Response): Promise<any> => {
         await userRepository.remove(user);
         return res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
-        console.error('Error deleting user  :', error);
+        // console.error('Error deleting user  :', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };  

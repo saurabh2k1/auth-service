@@ -37,7 +37,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
 
         return res.status(200).json({ message: 'Password reset link sent to your email' });
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -69,7 +69,7 @@ export const resetPassword = async (req: Request, res: Response) => {
 
         return res.status(200).json({ message: 'Password reset successfully' });    
     } catch (error) {
-        console.error('Error resetting password:', error);
+        // console.error('Error resetting password:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
