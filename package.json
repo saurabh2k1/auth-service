@@ -35,7 +35,6 @@
     "jest-mock-extended": "^4.0.0-beta1",
     "nodemon": "^3.1.9",
     "pg-mem": "^3.0.5",
-    "rimraf": "^6.0.1",
     "supertest": "^7.1.0",
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
@@ -51,6 +50,7 @@
     "nstall": "^0.2.0",
     "pg": "^8.14.1",
     "qrcode": "^1.5.4",
+    "rimraf": "^6.0.1",
     "speakeasy": "^2.0.0",
     "typeorm": "^0.3.21"
   }
