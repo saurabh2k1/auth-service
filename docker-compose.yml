@@ -9,6 +9,7 @@ services:
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=4{DB_DATABASE}
     volumes:
       - local_pgdata:/var/lib/postgresql/data
   pgadmin:
@@ -22,6 +23,16 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     volumes:
       - pgadmin-data:/var/lib/pgadmin
+  auth-service:
+    build: .
+    container_name: auth-service
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
 
 volumes:
   local_pgdata:

@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+   "build": "rm -rf dist && tsc",
     "test": "jest",
-    "start": "ts-node ./src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts",
+    "prepare": "husky install",
+    "migrate": "npx typeorm migration:run -d dist/data-source.js",
+    "seed": "node dist/scripts/seed.js"
+  },
+  "repository": {
+    "type": "git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Saurabh Sharma",
   "license": "ISC",
-  "description": "",
+  "description": "Authentication & Authorisation Microservice with Two Factor Authentication",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
@@ -20,9 +29,13 @@
     "@types/qrcode": "^1.5.5",
     "@types/speakeasy": "^2.0.10",
     "@types/supertest": "^6.0.3",
+    "eslint": "^9.23.0",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-mock-extended": "^4.0.0-beta1",
+    "nodemon": "^3.1.9",
     "pg-mem": "^3.0.5",
+    "rimraf": "^6.0.1",
     "supertest": "^7.1.0",
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",

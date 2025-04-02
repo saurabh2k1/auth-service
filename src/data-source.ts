@@ -1,19 +1,28 @@
 import { DataSource } from "typeorm";
 import * as dotenv from 'dotenv';
+import path from "path";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: "postgres", 
   host: "localhost",
-  port: 5432,
+  port: Number(process.env.DB_PORT) || 5432,
   username: process.env.DB_USERNAME || "postgres",
   password: process.env.DB_PASSWORD || "postgres",
   database: process.env.DB_DATABASE || "postgres",
   synchronize: false,    // make false for production
   logging: false,
-  entities: ["src/entity/**/*.ts"],
-  migrations: ["src/migration/**/*.ts"],
-  subscribers: ["src/subscriber/**/*.ts"],
+  entities: [
+    process.env.NODE_ENV === "production"
+    ? path.join(__dirname, "entity/**/*.js")
+    : path.join(__dirname, "src/entity/**/*.ts")
+  ],
+  migrations: [
+    process.env.NODE_ENV === "production"
+    ? path.join(__dirname, "migration/**/*.js")
+    : path.join(__dirname, "src/migration/**/*.ts")
+  ],
+  subscribers: [],
 });
 
 // AppDataSource.initialize()

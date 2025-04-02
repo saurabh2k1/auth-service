@@ -4,4 +4,6 @@ node_modules
 
 .DS-Store
 Thumbs.db
+dist
+
 
