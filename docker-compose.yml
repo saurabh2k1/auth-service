@@ -7,9 +7,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=4{DB_DATABASE}
+      - POSTGRES_DB={DB_DATABASE}
     volumes:
       - local_pgdata:/var/lib/postgresql/data
   pgadmin:
