@@ -5,7 +5,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import { sendEmail } from "../utility/email.service";
 import { User } from "../entity/User";
-
+import logger from "../utility/logger";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
@@ -37,7 +37,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
 
         return res.status(200).json({ message: 'Password reset link sent to your email' });
     } catch (error) {
-        // console.error(error);
+        logger.error('Error requesting password reset:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -69,7 +69,7 @@ export const resetPassword = async (req: Request, res: Response) => {
 
         return res.status(200).json({ message: 'Password reset successfully' });    
     } catch (error) {
-        // console.error('Error resetting password:', error);
+        logger.error('Error resetting password:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };

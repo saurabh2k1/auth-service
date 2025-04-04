@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import speakeasy from 'speakeasy';
 import QRCode from 'qrcode';
 import { validationResult } from "express-validator";
+import logger from "../utility/logger";
 
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-jwt-secret';
@@ -44,7 +45,7 @@ export const registerUser = async (req: Request, res: Response) => {
         await userRepository.save(user);
         return res.status(201).json({ message: 'User registered successfully', userId: user.id });
     } catch (error) {
-        // console.error(error);
+        logger.error('Registration error:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -91,7 +92,7 @@ export const loginUser = async (req: Request, res: Response) => {
         return res.status(200).json({ message: 'Login successful', token });
     
     } catch (error) {
-        // console.error('Login error:', error);
+        logger.error('Login error:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }   
 };
@@ -120,7 +121,7 @@ export const setupTOTP = async (req: Request, res: Response) => {
 
         return res.status(200).json({ secret: secret.base32, qrCode: qrCodeUrl });
     } catch (error) {
-        // console.error('TOTP setup error:', error)
+        logger.error('TOTP setup error:', error)
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -147,7 +148,7 @@ export const verifyOTPForTOTP = async (req: Request, res: Response) => {
 
         return res.status(200).json({ message: 'OTP verified successfully' });
     } catch (error) {
-        // console.error('OTP verification error:', error);
+        logger.error('OTP verification error:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
@@ -162,7 +163,7 @@ const verifyOTP = async (otp: string, secret: string): Promise<boolean> => {
             window: 1
         });
     } catch (error) {
-        // console.error('OTP verification error:', error);
+        logger.error('OTP verification error:', error);
         return false;
     }
 };
@@ -194,7 +195,7 @@ export const changePassword = async (req: Request, res: Response) => {
         return res.status(200).json({ message: 'Password changed successfully' });
         
     } catch (error) {
-        // console.error('Password change error : ', error);
+        logger.error('Password change error : ', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };  
