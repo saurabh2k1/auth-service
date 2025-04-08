@@ -13,9 +13,10 @@ export const AppDataSource = new DataSource({
   synchronize: false,    // make false for production
   logging: false,
   entities: [
-    process.env.NODE_ENV === "production"
-    ? path.join(__dirname, "entity/**/*.js")
-    : path.join(__dirname, "src/entity/**/*.ts")
+    // process.env.NODE_ENV === "production"
+    // ? path.join(__dirname, "entity/**/*.js")
+    // : path.join(__dirname, "src/entity/**/*.ts")
+    "src/entity/**/*.ts"
   ],
   migrations: [
     process.env.NODE_ENV === "production"
