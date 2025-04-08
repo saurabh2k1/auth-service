@@ -18,6 +18,15 @@ const httpRequestDurationMicroseconds = new client.Histogram({
 
 register.registerMetric(httpRequestDurationMicroseconds);
 
+export const dbQueryDurationHistogrm = new client.Histogram({
+    name: 'db_query_duration_seconds',
+    help: 'Duration of DB queries in seconds',
+    labelNames: ['operation', 'entity'],
+    buckets: [0.005, 0.01, 0.05, 0.1, 0.5, 1, 2, 5], // tune as needed
+});
+
+register.registerMetric(dbQueryDurationHistogrm);
+
 
 export const matricsMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const start = process.hrtime();
@@ -35,6 +44,8 @@ export const matricsMiddleware = (req: Request, res: Response, next: NextFunctio
     res.on('finish', observeDuration);
     next();
 };
+
+
 
 export const matricsEndpoint = async (req: Request, res: Response) => {
     res.set('Content-Type', register.contentType);

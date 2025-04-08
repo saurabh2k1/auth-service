@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import * as dotenv from 'dotenv';
 import path from "path";
+import { TypeORMLogger } from "./utility/typeorm-logger";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
   password: process.env.DB_PASSWORD || "postgres",
   database: process.env.DB_DATABASE || "postgres",
   synchronize: false,    // make false for production
-  logging: false,
+  logger: new TypeORMLogger(),
   entities: [
     // process.env.NODE_ENV === "production"
     // ? path.join(__dirname, "entity/**/*.js")
