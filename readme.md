@@ -150,7 +150,7 @@ npm test
 
 ## 🔥 Logging & Monitoring
 - **Logs are stored in `/logs` directory** using Winston & Morgan.
-<!-- - API performance monitoring can be done with tools like Prometheus, Grafana. -->
+- API performance monitoring can be done with tools like Prometheus, Grafana.
 
 ---
 
