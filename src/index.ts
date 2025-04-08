@@ -10,9 +10,6 @@ import { matricsMiddleware, matricsEndpoint, testCounter } from './monitor/metri
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// setInterval(() => {
-//   testCounter.inc();
-// }, 5000);
 
 app.use(express.json());
 app.use(requestLogger);
